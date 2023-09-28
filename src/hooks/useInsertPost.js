@@ -29,10 +29,8 @@ export const useInsertPost = (docCollection) => {
     const [state, dispatch] = useReducer(insertReducerFunction, initialState)
 
     const checkCancelBeforeDispatch = (action) => {
-        console.log('teste')
-        console.log(cancelled)
+
         if (!cancelled) {
-            console.log('teste')
             dispatch(action)
         }
     }
@@ -54,7 +52,7 @@ export const useInsertPost = (docCollection) => {
 
             checkCancelBeforeDispatch({
                 type: "INSERTED_POST",
-                payload: insertPost
+                payload: insertedPost
             })
 
         } catch (error) {
