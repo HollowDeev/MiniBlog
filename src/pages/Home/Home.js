@@ -1,27 +1,30 @@
 import { useState } from "react"
 import styles from "./Home.module.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useFetchPosts } from "../../hooks/useFetchDocuments"
-import Posts from "../../components/Post/Post"
+
 import Post from "../../components/Post/Post"
 
 export default function Home() {
   const [query, setQuery] = useState('')
 
+  const navigate = useNavigate()
+  
   const { posts, loading } = useFetchPosts("posts")
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    return navigate(`/search/?q=${query}`)
   }
 
   return (
     <main className={styles.home}>
       <h1>Posts Recentes</h1>
-      <form className={styles.search_form}>
+      <form className={styles.search_form} onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Buscar por tags..."
-          onSubmit={handleSubmit}
           onChange={(e) => setQuery(e.target.value)}
         />
         <button className="btn btn-dark" type="submit">Pesquisar</button>

@@ -53,7 +53,7 @@ export default function CreatePost() {
       createdBy: user.displayName
     })
 
-    navigate('/')
+    // navigate('/')
   }
 
   return (

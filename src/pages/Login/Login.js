@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useAuthentication } from '../../hooks/useAuthentication'
+import styles from "./Login.module.css"
+import { Link } from 'react-router-dom'
 
 export default function Login() {
 
@@ -29,7 +31,7 @@ export default function Login() {
     }
 
   return (
-    <div>
+    <div className={styles.login_container}>
       <h1>Entre para postar</h1>
         <p>Entre para poder compartilhar suas historias</p>
         <form>
@@ -55,6 +57,7 @@ export default function Login() {
                     onChange={e => setPassword(e.target.value)}
                 />
             </label>
+            <Link to='/register'>Criar uma conta</Link>
             
             {error && <p className='error'>{error}</p>}
             {loading ? 

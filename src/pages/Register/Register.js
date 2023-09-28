@@ -1,5 +1,6 @@
 import { useAuthentication } from '../../hooks/useAuthentication'
 import { useEffect, useState } from 'react'
+import styles from './Register.module.css'
 
 export default function Register() {
     const [name, setName] = useState('')
@@ -38,7 +39,7 @@ export default function Register() {
     }
 
     return (
-        <div>
+        <div className={styles.register_container}>
             <h1>Cadastra-se para postar</h1>
             <p>Crie o seu usuário e compartilhe suas histórias</p>
             <form>

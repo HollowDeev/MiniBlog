@@ -14,6 +14,7 @@ import Register from './pages/Register/Register';
 import CreatePost from './pages/CreatePost/CreatePost'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Validation from './components/Validation/Validation'
+import Search from './pages/Search/Search'
 
 import { AuthProvider } from './context/AuthContext';
 import { useEffect, useState } from 'react';
@@ -43,6 +44,7 @@ function App() {
           <div className="container">
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='/search' element={<Search />} />
               <Route path='/about' element={<About />} />
               <Route path='/login' element={
                 <Validation mode='notLogged'>
