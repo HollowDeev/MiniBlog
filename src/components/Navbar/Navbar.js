@@ -1,7 +1,44 @@
 import { NavLink } from 'react-router-dom'
 import styles from './Navbar.module.css'
+import { useAuthValue } from '../../context/AuthContext'
+import { useAuthentication } from '../../hooks/useAuthentication'
+
+
 
 export default function Navbar() {
+    const { user } = useAuthValue()
+
+    const { logout } = useAuthentication()
+
+    const loginNav = (
+        <li>
+            <NavLink to='/login' className={({isActive}) => (isActive ? styles.active : '')}>
+                Entrar
+            </NavLink>
+        </li>
+    )
+
+    const userMenu = (
+        <>
+            <li>
+                <NavLink to='/dashboard' className={({isActive}) => (isActive ? styles.active : '')}>
+                    Dashboard
+                </NavLink>
+            </li>
+
+            <li>
+                <NavLink to='/posts/create' className={({isActive}) => (isActive ? styles.active : '')}>
+                    Postar
+                </NavLink>
+            </li>
+
+            <li>
+                <button className='btn-danger' onClick={logout}>Sair</button>
+            </li>
+        </>
+    )
+
+
   return (
     <nav className={styles.navbar}>
         <NavLink to='/'  className={styles.brand}>
@@ -17,9 +54,9 @@ export default function Navbar() {
             <li>
                 <NavLink to='/about' className={({isActive}) => (isActive ? styles.active : '')}>Sobre</NavLink>
             </li>
-            <li>
-                <NavLink to='/login' className={({isActive}) => (isActive ? styles.active : '')}>Entrar</NavLink>
-            </li>
+            {
+               !user ? loginNav : userMenu
+            }
         </ul>
     </nav>
   )

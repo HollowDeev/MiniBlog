@@ -1,4 +1,5 @@
 
+// eslint-disable-next-line no-unused-vars
 import  { db } from "../firebase/config"   
 
 import { 
@@ -67,6 +68,13 @@ export const useAuthentication = () => {
         setLoading(false)
     }
 
+    const logout = () => {
+
+        checkIfIsCancelled()
+
+        signOut(auth)
+    }
+
     useEffect(()=> {
         return () => setCancelled(true)
     }, [])
@@ -75,6 +83,7 @@ export const useAuthentication = () => {
         auth, 
         createUser,
         error,
-        loading
+        loading,
+        logout
     }
 }
