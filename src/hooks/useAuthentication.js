@@ -75,6 +75,35 @@ export const useAuthentication = () => {
         signOut(auth)
     }
 
+    const login = async (data) => {
+
+        checkIfIsCancelled()
+        setLoading(true)
+        setError('')
+
+        try {
+            await signInWithEmailAndPassword(auth, data.email, data.password)
+            setLoading(false)
+        } catch (error) {
+            
+            let systemErrorMessage 
+
+            if(error.message.includes('invalid-login-credentials')) {
+                systemErrorMessage = 'Usuário ou senha inválido'
+            } else if(
+                error.message.includes('too-many-requests')
+            ){
+                systemErrorMessage = 'Conta temporariamente suspensa por excesso de tentativa - Tente novamente em alguns minutos'
+            }else {
+                systemErrorMessage = 'Ocorreu um erro, por favor tente mais tarde'
+            }
+
+            console.log(error.message)
+            setError(systemErrorMessage)
+            setLoading(false)
+        }
+    }
+
     useEffect(()=> {
         return () => setCancelled(true)
     }, [])
@@ -84,6 +113,7 @@ export const useAuthentication = () => {
         createUser,
         error,
         loading,
-        logout
+        logout,
+        login
     }
 }
